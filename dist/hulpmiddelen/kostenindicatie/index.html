@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kostenindicatie voor een klus berekenen | Echteklussers.nl</title>
+<meta name="description" content="Rekenhulp die uurtarief, uren, voorrijkosten, toeslagen en materiaal omzet in een bandbreedte om een offerte tegen af te zetten.">
+<link rel="canonical" href="https://echteklussers.nl/hulpmiddelen/kostenindicatie/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="nl_NL">
+<meta property="og:site_name" content="Echteklussers.nl">
+<meta property="og:title" content="Kostenindicatie voor een klus berekenen | Echteklussers.nl">
+<meta property="og:description" content="Rekenhulp die uurtarief, uren, voorrijkosten, toeslagen en materiaal omzet in een bandbreedte om een offerte tegen af te zetten.">
+<meta property="og:url" content="https://echteklussers.nl/hulpmiddelen/kostenindicatie/">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="Echteklussers.nl nieuws" href="/rss.xml">
+<link rel="stylesheet" href="/stijl.css">
+
+
+</head>
+<body>
+<a class="overslaan" href="#hoofd">Naar de inhoud</a>
+<header class="kop">
+  <div class="binnen kopbalk">
+    <a class="merk" href="/">Echteklussers<span>.nl</span></a>
+    <button class="menuknop" aria-expanded="false" aria-controls="hoofdmenu">Menu</button>
+    <nav id="hoofdmenu" aria-label="Hoofdmenu"><ul><li><a href="/vakmensen/">Vakmensen</a></li><li><a href="/kiezen/">Kiezen</a></li><li><a href="/tarieven/">Tarieven</a></li><li><a href="/hulpmiddelen/">Hulpmiddelen</a></li><li><a href="/nieuws/">Nieuws</a></li><li><a href="/over/">Over</a></li><li><a href="/contact/">Contact</a></li></ul></nav>
+  </div>
+</header>
+<main id="hoofd">
+<nav class="kruimels" aria-label="Kruimelpad"><a href="/">Home</a> <span class="sep">/</span> <a href="/hulpmiddelen/">Hulpmiddelen</a> <span class="sep">/</span> <span>Kostenindicatie klus</span></nav>
+
+<section class="smal">
+<h1>Kostenindicatie klus</h1>
+<p>Deze rekenhulp zet een geschat aantal uren om in een indicatie van de rekening, inclusief
+voorrijkosten, toeslagen en materiaal. De uitkomst is een orde van grootte om een offerte
+tegen af te zetten, geen offerte.</p>
+
+<div class="tool">
+  <label for="vak">Vakgebied</label>
+  <select id="vak">
+    <option value="40|60">Hovenier, onderhoud</option>
+    <option value="45|65" selected>Klusjesman</option>
+    <option value="45|70">Schilder</option>
+    <option value="50|75">Timmerman</option>
+    <option value="50|75">Stukadoor</option>
+    <option value="50|80">Tegelzetter</option>
+    <option value="55|85">Loodgieter</option>
+    <option value="55|85">Elektricien</option>
+    <option value="55|90">Dakdekker</option>
+  </select>
+
+  <label for="uren">Geschat aantal uren</label>
+  <input type="number" id="uren" value="3" min="0.5" step="0.5">
+
+  <label for="voorrij">Voorrijkosten in euro</label>
+  <input type="number" id="voorrij" value="35" min="0" step="5">
+
+  <label for="toeslag">Moment van uitvoering</label>
+  <select id="toeslag">
+    <option value="1" selected>Gepland, binnen kantooruren</option>
+    <option value="1.35">Spoed binnen kantooruren</option>
+    <option value="1.75">Spoed buiten kantooruren</option>
+    <option value="1.6">Weekend</option>
+  </select>
+
+  <label for="materiaal">Materiaal in euro</label>
+  <input type="number" id="materiaal" value="0" min="0" step="10">
+
+  <div class="uitkomst" id="uitkomst" aria-live="polite"></div>
+  <p class="let">De berekening draait in de browser. Er wordt niets opgeslagen en niets
+  verstuurd. De tarieven zijn bandbreedtes uit de markt, geen vaste prijzen.</p>
+</div>
+
+<h2>Hoe de uitkomst te gebruiken</h2>
+<p>De uitkomst is een bandbreedte. Een offerte die daarbinnen valt, is marktconform. Een
+offerte die er ver onder ligt, is dat meestal doordat er iets niet in zit. Een offerte die
+er ver boven ligt, hoort toegelicht te worden met de reden: moeilijke bereikbaarheid,
+specialistisch materiaal, of werk dat meer uren vraagt dan geschat.</p>
+
+<h2>Wat in de schatting van de uren meespeelt</h2>
+<ul>
+<li>Bereikbaarheid: een tweede verdieping zonder lift kost tijd</li>
+<li>Ondergrond: boren in beton duurt langer dan in gipsplaat</li>
+<li>Voorbereiding en opruimen tellen mee als werktijd</li>
+<li>Meerdere klussen achter elkaar zijn per klus goedkoper dan los ingepland</li>
+</ul>
+<p>Meer over de keuze tussen uurtarief en vaste prijs staat op
+<a href="/kiezen/uurtarief-of-vaste-prijs/">uurtarief of vaste prijs</a>. De volledige
+tarievenlijst staat op <a href="/tarieven/">tarieven</a>.</p>
+</section>
+<script>
+(function(){
+  var euro=function(n){return n.toLocaleString('nl-NL',{style:'currency',currency:'EUR',maximumFractionDigits:0});};
+  function reken(){
+    var vak=document.getElementById('vak').value.split('|');
+    var laag=parseFloat(vak[0]),hoog=parseFloat(vak[1]);
+    var uren=parseFloat(document.getElementById('uren').value)||0;
+    var voorrij=parseFloat(document.getElementById('voorrij').value)||0;
+    var mat=parseFloat(document.getElementById('materiaal').value)||0;
+    var f=parseFloat(document.getElementById('toeslag').value);
+    var min=uren*laag*f+voorrij+mat;
+    var max=uren*hoog*f+voorrij+mat;
+    document.getElementById('uitkomst').innerHTML=
+      '<b>'+euro(min)+' tot '+euro(max)+'</b>'+
+      '<p>Arbeid '+euro(uren*laag*f)+' tot '+euro(uren*hoog*f)+'<br>'+
+      'Voorrijkosten '+euro(voorrij)+'<br>'+
+      'Materiaal '+euro(mat)+'<br>'+
+      'Gehanteerd uurtarief '+euro(laag*f)+' tot '+euro(hoog*f)+'</p>';
+  }
+  ['vak','uren','voorrij','toeslag','materiaal'].forEach(function(id){
+    var el=document.getElementById(id);
+    el.addEventListener('input',reken);el.addEventListener('change',reken);
+  });
+  reken();
+})();
+</script>
+</main>
+<footer class="voet">
+  <div class="binnen voetgrid">
+    <div>
+      <p class="voetmerk">Echteklussers.nl</p>
+      <p>Onafhankelijke gids over het vinden en beoordelen van vakmensen.</p>
+      <p><a href="mailto:info@echteklussers.nl">info@echteklussers.nl</a></p>
+    </div>
+    
+<div>
+  <h4>Vakmensen</h4>
+  <ul>
+    <li><a href="/vakmensen/klusjesman/">Klusjesman</a></li>
+    <li><a href="/vakmensen/loodgieter/">Loodgieter</a></li>
+    <li><a href="/vakmensen/elektricien/">Elektricien</a></li>
+    <li><a href="/vakmensen/schilder/">Schilder</a></li>
+    <li><a href="/vakmensen/timmerman/">Timmerman</a></li>
+  </ul>
+</div>
+<div>
+  <h4>Kiezen en beoordelen</h4>
+  <ul>
+    <li><a href="/kiezen/betrouwbare-vakman-herkennen/">Betrouwbare vakman herkennen</a></li>
+    <li><a href="/kiezen/offerte-lezen/">Offerte lezen</a></li>
+    <li><a href="/kiezen/garantie-en-nazorg/">Garantie en nazorg</a></li>
+    <li><a href="/kiezen/reviews-beoordelen/">Reviews beoordelen</a></li>
+    <li><a href="/kiezen/klacht-en-geschil/">Klacht en geschil</a></li>
+  </ul>
+</div>
+<div>
+  <h4>Meer</h4>
+  <ul>
+    <li><a href="/tarieven/">Tarieven per vakgebied</a></li>
+    <li><a href="/hulpmiddelen/kostenindicatie/">Kostenindicatie klus</a></li>
+    <li><a href="/hulpmiddelen/vragen-voor-de-vakman/">Vragen voor de vakman</a></li>
+    <li><a href="/nieuws/">Nieuws</a></li>
+    <li><a href="/contact/">Contact</a></li>
+  </ul>
+</div>
+
+  </div>
+  <div class="binnen voetonder">
+    <p>&copy; 2026 Echteklussers.nl</p>
+    <p><a href="/privacybeleid/">Privacybeleid</a> <span class="sep">/</span> <a href="/cookiebeleid/">Cookiebeleid</a> <span class="sep">/</span> <a href="/contact/">Contact</a></p>
+  </div>
+</footer>
+<script>
+(function(){
+  var b=document.querySelector('.menuknop'),n=document.getElementById('hoofdmenu');
+  if(!b||!n)return;
+  b.addEventListener('click',function(){
+    var open=n.classList.toggle('open');
+    b.setAttribute('aria-expanded',open?'true':'false');
+  });
+})();
+</script>
+</body>
+</html>
