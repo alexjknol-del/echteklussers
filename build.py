@@ -6,7 +6,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from sitegen import Site, render
+from sitegen import Site, render, rij, lijst, feit, video, inhoudsopgave
 from theme import CSS, FAVICON
 from content import vakmensen as C_VAK
 from content import kiezen as C_KIES
@@ -38,45 +38,25 @@ CRUMBS = {
     '/nieuws/': 'Nieuws',
 }
 
-FOOTERCOLS = """
-<div>
-  <h4>Vakmensen</h4>
-  <ul>
-    <li><a href="/vakmensen/klusjesman/">Klusjesman</a></li>
-    <li><a href="/vakmensen/loodgieter/">Loodgieter</a></li>
-    <li><a href="/vakmensen/elektricien/">Elektricien</a></li>
-    <li><a href="/vakmensen/schilder/">Schilder</a></li>
-    <li><a href="/vakmensen/timmerman/">Timmerman</a></li>
-  </ul>
-</div>
-<div>
-  <h4>Kiezen en beoordelen</h4>
-  <ul>
-    <li><a href="/kiezen/betrouwbare-vakman-herkennen/">Betrouwbare vakman herkennen</a></li>
-    <li><a href="/kiezen/offerte-lezen/">Offerte lezen</a></li>
-    <li><a href="/kiezen/garantie-en-nazorg/">Garantie en nazorg</a></li>
-    <li><a href="/kiezen/reviews-beoordelen/">Reviews beoordelen</a></li>
-    <li><a href="/kiezen/klacht-en-geschil/">Klacht en geschil</a></li>
-  </ul>
-</div>
-<div>
-  <h4>Meer</h4>
-  <ul>
-    <li><a href="/tarieven/">Tarieven per vakgebied</a></li>
-    <li><a href="/hulpmiddelen/kostenindicatie/">Kostenindicatie klus</a></li>
-    <li><a href="/hulpmiddelen/vragen-voor-de-vakman/">Vragen voor de vakman</a></li>
-    <li><a href="/nieuws/">Nieuws</a></li>
-    <li><a href="/contact/">Contact</a></li>
-  </ul>
-</div>
-"""
+FOOTERLINKS = ''.join('<li><a href="%s">%s</a></li>' % (h, t) for t, h in [
+    ('Vakgebieden', '/vakmensen/'),
+    ('Kiezen en beoordelen', '/kiezen/'),
+    ('Tarieven', '/tarieven/'),
+    ('Kostenindicatie', '/hulpmiddelen/kostenindicatie/'),
+    ('Vragen voor de vakman', '/hulpmiddelen/vragen-voor-de-vakman/'),
+    ('Nieuws', '/nieuws/'),
+    ('Over deze gids', '/over/'),
+    ('Contact', '/contact/'),
+])
 
 CFG = dict(
     base=BASE, name=NAAM, email=EMAIL, builddate=BOUWDATUM,
     brandhtml='Echteklussers<span>.nl</span>',
+    topclaim='Onafhankelijk, zonder bemiddeling',
     nav=NAV, crumb_labels=CRUMBS, css=CSS, favicon=FAVICON,
-    footerline='Onafhankelijke gids over het vinden en beoordelen van vakmensen.',
-    footercols=FOOTERCOLS,
+    footerline='Onafhankelijke gids over het vinden en beoordelen van vakmensen. Geen '
+               'bemiddeling, geen offerteaanvraag, geen doorverkoop van gegevens.',
+    footerlinks=FOOTERLINKS,
     rssdesc='Nieuws over tarieven, regels en de praktijk van klussen uitbesteden.',
 )
 
@@ -99,12 +79,6 @@ def kk_blok(tekst=None, kop='Een klus laten inplannen'):
             'target="_blank">Kleine-Klussen.nl</a></p></div>' % (kop, tekst, KK))
 
 
-def kaart(titel, href, tekst, meta=''):
-    m = '<p class="meta">%s</p>' % meta if meta else ''
-    return ('<article class="kaart"><h3><a href="%s">%s</a></h3><p>%s</p>%s</article>'
-            % (href, titel, tekst, m))
-
-
 NL_MAAND = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus',
             'september', 'oktober', 'november', 'december']
 
@@ -113,6 +87,30 @@ def nl_datum(iso):
     j, m, d = iso.split('-')
     return '%d %s %s' % (int(d), NL_MAAND[int(m) - 1], j)
 
+
+def datumkort(iso):
+    j, m, d = iso.split('-')
+    return '%s.%s' % (d, m)
+
+
+def tekstpagina(titel, md, staart='', vid=None):
+    """Pagina met de tekst rechts en een inhoudsopgave links."""
+    koppen = []
+    tekst = render(md, koppen)
+    if vid:
+        tekst += '<h2 id="in-beeld">In beeld</h2>' + video(vid[0], vid[1])
+        koppen.append(('in-beeld', 'In beeld'))
+    toc = inhoudsopgave(koppen)
+    klasse = 'tekstlay' if toc else 'tekstlay zonder'
+    return ('<div class="%s">%s<div class="tekst"><h1>%s</h1>%s%s</div></div>'
+            % (klasse, toc, titel, tekst, staart))
+
+
+# Shorts van het YouTube-kanaal van Kleine-Klussen, bij het vak waar ze bij horen.
+VIDEOS = {
+    'elektricien': ('4l06IXIaC3w', 'Een stopcontact verplaatsen'),
+    'loodgieter': ('s7lE6Es1ziU', 'Een airco laten plaatsen'),
+}
 
 VAK_KORT = {
     'klusjesman': 'De generalist voor losse klussen, met de grens richting erkende installateur.',
@@ -138,78 +136,108 @@ KIES_KORT = {
     'klacht-en-geschil': 'Ingebrekestelling, betaling opschorten en de geschillencommissie.',
 }
 
-home_vak = ''.join(kaart(t, '/vakmensen/%s/' % s, VAK_KORT[s])
-                   for s, t, _d, _md in C_VAK.VAKKEN[:6])
-home_kies = ''.join(kaart(t, '/kiezen/%s/' % s, KIES_KORT[s])
-                    for s, t, _d, _md in C_KIES.ONDERWERPEN[:6])
-home_nieuws = ''.join(kaart(t, '/nieuws/%s/' % s, sam, nl_datum(datum))
-                      for s, datum, _rfc, t, _d, sam, _md in C_NIEUWS.ARTIKELEN[:3])
+# ---------------------------------------------------------------- home
+home_vakrijen = lijst([
+    rij('%02d' % (n + 1), t, '/vakmensen/%s/' % s, VAK_KORT[s])
+    for n, (s, t, _d, _md) in enumerate(C_VAK.VAKKEN)])
+
+home_kiesrijen = lijst([
+    rij('%02d' % (n + 1), t, '/kiezen/%s/' % s, KIES_KORT[s])
+    for n, (s, t, _d, _md) in enumerate(C_KIES.ONDERWERPEN)])
+
+home_nieuwsrijen = lijst([
+    rij(datumkort(datum), t, '/nieuws/%s/' % s,
+        sam + ' <span class="sans">' + nl_datum(datum) + '</span>')
+    for s, datum, _rfc, t, _d, sam, _md in C_NIEUWS.ARTIKELEN[:4]])
 
 HOME = """
-<section class="hero">
-  <div class="binnen">
-    <h1>Een vakman kiezen zonder gokken</h1>
-    <p class="lead">Echteklussers.nl legt uit hoe een klusbedrijf te beoordelen is voordat
-    de opdracht wordt gegeven: wat er in een offerte hoort, wat gangbare tarieven zijn per
-    vakgebied, wat garantie waard is en wat te doen als het werk niet deugt. Geen
-    bemiddeling, geen offerteaanvraag, geen formulier.</p>
-    <div class="cijfers">
-      <div class="cijfer"><b>5,4%</b><span>stijging van de loonkosten in de woningbouw in juni 2026, volgens het CBS</span></div>
-      <div class="cijfer"><b>14 dagen</b><span>bedenktijd bij een overeenkomst die buiten de bedrijfsruimte is gesloten</span></div>
-      <div class="cijfer"><b>2 jaar</b><span>verjaringstermijn voor een verborgen gebrek, gerekend vanaf de melding</span></div>
-    </div>
+<section class="opening">
+  <div class="blok">
+    <h1>Wie komt er straks over de vloer</h1>
+    <p class="lead">Voor de meeste klusberoepen bestaat geen beschermde titel en geen
+    verplichte registratie. Wie zich klusjesman, timmerman of tegelzetter noemt, mag dat.
+    Echteklussers.nl zet op een rij wat wel controleerbaar is: de administratieve basis, de
+    opbouw van een offerte, gangbare tarieven, wat garantie waard is en welke route er
+    openstaat als het werk niet deugt.</p>
+    <p class="meerlink"><a href="/kiezen/betrouwbare-vakman-herkennen/">Wat vooraf te
+    controleren is</a> &middot; <a href="/tarieven/">Wat het ongeveer kost</a> &middot;
+    <a href="/kiezen/klacht-en-geschil/">Wat te doen bij een geschil</a></p>
   </div>
 </section>
 
-<section>
-  <h2>Per vakgebied</h2>
-  <p>Wat het vak inhoudt, welke klussen erbij horen, wat gangbare tarieven zijn en welke
-  erkenningen bestaan.</p>
-  <div class="rooster">{vak}</div>
-  <p><a href="/vakmensen/">Alle vakgebieden</a></p>
+<section class="blok rand">
+  <h2>Tien vakgebieden</h2>
+  <p class="introtekst">Per vak het werk dat erbij hoort, de gangbare tarieven, de
+  erkenningen die bestaan en de punten waarop een offerte vaak uiteenloopt.</p>
+  {vak}
 </section>
 
-<section>
-  <h2>Kiezen en beoordelen</h2>
-  <p>Van de eerste selectie tot een geschil dat toch ontstaat, in de volgorde waarin het
-  speelt.</p>
-  <div class="rooster">{kies}</div>
-  <p><a href="/kiezen/">Alle onderwerpen</a></p>
+<section class="blok rand">
+  <h2>Vijf dingen die vooraf te controleren zijn</h2>
+  <ul class="checklist">
+    <li>Inschrijving in het handelsregister, met een activiteit die past bij het werk</li>
+    <li>Een aansprakelijkheidsverzekering voor bedrijven, met een polisblad dat opvraagbaar is</li>
+    <li>Een btw-nummer op de offerte, en een factuur per bank in plaats van contant</li>
+    <li>Een adres van een werk dat twee jaar geleden is opgeleverd, in plaats van foto's</li>
+    <li>Een offerte die arbeid en materiaal apart benoemt en uitsluitingen vermeldt</li>
+  </ul>
+  <p class="meerlink"><a href="/kiezen/betrouwbare-vakman-herkennen/">De volledige uitleg,
+  inclusief de signalen die op problemen wijzen</a></p>
 </section>
 
-<section>
+<section class="blok">
   {kkblok}
 </section>
 
-<section>
-  <h2>In vier stappen naar een opdracht</h2>
-  <ol class="stappen">
-    <li><b>Omschrijf de klus op papier</b>Een omschrijving van een paar regels levert offertes op die onderling te vergelijken zijn. Zonder omschrijving offreert iedereen iets anders.</li>
-    <li><b>Vraag drie offertes op binnen enkele weken</b>Offertes van verschillende maanden zijn niet vergelijkbaar, omdat tarieven meebewegen met de loonkosten.</li>
-    <li><b>Controleer de basis</b>Inschrijving in het handelsregister, een aansprakelijkheidsverzekering en een btw-nummer op de offerte.</li>
-    <li><b>Leg garantie en betaling vast</b>Betalen in termijnen op basis van voortgang, met een deel dat pas voldaan wordt na afhandeling van de opleverpunten.</li>
-  </ol>
+<section class="blok rand">
+  <h2>Tarieven in het kort</h2>
+  <p class="introtekst">Bandbreedtes die in Nederland gangbaar zijn voor particuliere
+  opdrachtgevers, inclusief btw. Voorrijkosten liggen doorgaans tussen 25 en 60 euro.</p>
+  <div class="tabelwrap"><table>
+    <thead><tr><th>Vakgebied</th><th>Tarief per uur</th></tr></thead>
+    <tbody>
+      <tr><td>Hovenier, onderhoud</td><td>40 tot 60 euro</td></tr>
+      <tr><td>Klusjesman</td><td>45 tot 65 euro</td></tr>
+      <tr><td>Schilder</td><td>45 tot 70 euro</td></tr>
+      <tr><td>Timmerman</td><td>50 tot 75 euro</td></tr>
+      <tr><td>Tegelzetter</td><td>50 tot 80 euro</td></tr>
+      <tr><td>Loodgieter</td><td>55 tot 85 euro</td></tr>
+      <tr><td>Elektricien</td><td>55 tot 85 euro</td></tr>
+    </tbody>
+  </table></div>
+  <p class="meerlink"><a href="/tarieven/">Alle tarieven, vaste prijzen en prijzen per
+  vierkante meter</a> &middot; <a href="/hulpmiddelen/kostenindicatie/">Zelf een indicatie
+  berekenen</a></p>
 </section>
 
-<section>
+<section class="blok rand">
+  <h2>Kiezen en beoordelen</h2>
+  <p class="introtekst">Van de eerste selectie tot een geschil dat toch ontstaat, in de
+  volgorde waarin het speelt.</p>
+  {kies}
+</section>
+
+<section class="blok rand">
   <h2>Laatste artikelen</h2>
-  <div class="rooster">{nieuws}</div>
-  <p><a href="/nieuws/">Alle artikelen</a></p>
+  {nieuws}
+  <p class="meerlink"><a href="/nieuws/">Alle artikelen</a> &middot;
+  <a href="/rss.xml">rss-feed</a></p>
 </section>
 
-<section>
+<section class="blok">
   <h2>Wat deze site niet doet</h2>
-  <p>Echteklussers.nl bemiddelt niet, vraagt geen offertes aan en verkoopt geen
-  contactgegevens door. Er staat geen formulier op deze site. Contact loopt via
-  <a href="mailto:{email}">{email}</a>. Meer daarover staat op
-  <a href="/over/">de pagina over deze gids</a>.</p>
+  <p class="introtekst">Echteklussers.nl bemiddelt niet, vraagt geen offertes aan en
+  verkoopt geen contactgegevens door. Er staat geen formulier op deze site en er wordt geen
+  enkel bedrijf aanbevolen. Contact loopt via <a href="mailto:{email}">{email}</a>. Meer
+  daarover staat op <a href="/over/">de pagina over deze gids</a>.</p>
 </section>
-""".format(vak=home_vak, kies=home_kies, nieuws=home_nieuws, kkblok=kk_blok(), email=EMAIL)
+""".format(vak=home_vakrijen, kies=home_kiesrijen, nieuws=home_nieuwsrijen,
+           kkblok=kk_blok(), email=EMAIL)
 
-site.add('/', T('Een vakman kiezen zonder gokken'),
+site.add('/', T('Wie komt er straks over de vloer'),
          'Onafhankelijke gids over het vinden en beoordelen van vakmensen: tarieven per '
          'vakgebied, offertes lezen, garantie, reviews en wat te doen bij een geschil.',
-         HOME, h1='Een vakman kiezen zonder gokken', priority='1.0',
+         HOME, h1='Wie komt er straks over de vloer', priority='1.0',
          schema=json.dumps({
              "@context": "https://schema.org", "@type": "WebSite", "name": NAAM,
              "url": BASE + "/", "inLanguage": "nl-NL",
@@ -217,11 +245,12 @@ site.add('/', T('Een vakman kiezen zonder gokken'),
          }, ensure_ascii=False))
 
 # ---------------------------------------------------------------- vakmensen
-vak_index = ('<section class="smal"><h1>Vakgebieden</h1>%s</section>'
-             '<section><div class="rooster">%s</div></section><section>%s</section>'
+vak_index = ('<section class="opening"><div class="blok"><h1>Vakgebieden</h1>%s</div></section>'
+             '<section class="blok">%s</section>'
+             '<section class="blok">%s</section>'
              % (render(C_VAK.INDEX_INTRO),
-                ''.join(kaart(t, '/vakmensen/%s/' % s, VAK_KORT[s])
-                        for s, t, _d, _md in C_VAK.VAKKEN),
+                lijst([rij('%02d' % (n + 1), t, '/vakmensen/%s/' % s, VAK_KORT[s])
+                       for n, (s, t, _d, _md) in enumerate(C_VAK.VAKKEN)]),
                 kk_blok()))
 
 site.add('/vakmensen/', T('Vakgebieden: welk vak voor welke klus'),
@@ -229,27 +258,40 @@ site.add('/vakmensen/', T('Vakgebieden: welk vak voor welke klus'),
          'gangbare tarieven, de erkenningen en de aandachtspunten.',
          vak_index, h1='Vakgebieden', priority='0.9')
 
-for slug, titel, desc, md in C_VAK.VAKKEN:
-    blok = '' if slug == 'klusjesman' else kk_blok()
-    body = '<section class="smal"><h1>%s</h1>%s%s</section>' % (titel, render(md), blok)
-    site.add('/vakmensen/%s/' % slug, T('%s: werk, tarieven en aandachtspunten' % titel),
-             desc, body, h1=titel)
+for slug_, titel, desc, md in C_VAK.VAKKEN:
+    staart = '' if slug_ == 'klusjesman' else kk_blok()
+    site.add('/vakmensen/%s/' % slug_, T('%s: werk, tarieven en aandachtspunten' % titel),
+             desc, tekstpagina(titel, md, staart, VIDEOS.get(slug_)), h1=titel)
 
 # ---------------------------------------------------------------- kiezen
-kies_index = ('<section class="smal"><h1>Kiezen en beoordelen</h1>%s</section>'
-              '<section><div class="rooster">%s</div></section>'
+kies_index = ('<section class="opening"><div class="blok"><h1>Kiezen en beoordelen</h1>%s</div></section>'
+              '<section class="blok">%s</section>'
+              '<section class="blok"><h2>In vier stappen naar een opdracht</h2>'
+              '<ol class="stappen">'
+              '<li><b>Omschrijf de klus op papier</b>Een omschrijving van een paar regels '
+              'levert offertes op die onderling te vergelijken zijn. Zonder omschrijving '
+              'offreert iedereen iets anders.</li>'
+              '<li><b>Vraag drie offertes op binnen enkele weken</b>Offertes van '
+              'verschillende maanden zijn niet vergelijkbaar, omdat tarieven meebewegen met '
+              'de loonkosten.</li>'
+              '<li><b>Controleer de basis</b>Inschrijving in het handelsregister, een '
+              'aansprakelijkheidsverzekering en een btw-nummer op de offerte.</li>'
+              '<li><b>Leg garantie en betaling vast</b>Betalen in termijnen op basis van '
+              'voortgang, met een deel dat pas voldaan wordt na afhandeling van de '
+              'opleverpunten.</li>'
+              '</ol></section>'
               % (render(C_KIES.INDEX_INTRO),
-                 ''.join(kaart(t, '/kiezen/%s/' % s, KIES_KORT[s])
-                         for s, t, _d, _md in C_KIES.ONDERWERPEN)))
+                 lijst([rij('%02d' % (n + 1), t, '/kiezen/%s/' % s, KIES_KORT[s])
+                        for n, (s, t, _d, _md) in enumerate(C_KIES.ONDERWERPEN)])))
 
 site.add('/kiezen/', T('Vakman kiezen en beoordelen'),
          'Hoe een klusbedrijf te beoordelen is voordat de opdracht wordt gegeven: '
          'controle vooraf, offertes, garantie, reviews en de route bij een geschil.',
          kies_index, h1='Kiezen en beoordelen', priority='0.9')
 
-for slug, titel, desc, md in C_KIES.ONDERWERPEN:
-    body = '<section class="smal"><h1>%s</h1>%s%s</section>' % (titel, render(md), kk_blok())
-    site.add('/kiezen/%s/' % slug, T(titel), desc, body, h1=titel)
+for slug_, titel, desc, md in C_KIES.ONDERWERPEN:
+    site.add('/kiezen/%s/' % slug_, T(titel), desc,
+             tekstpagina(titel, md, kk_blok()), h1=titel)
 
 # ---------------------------------------------------------------- tarieven
 TARIEVEN_MD = """
@@ -327,21 +369,29 @@ jaar eerder, met een loonstijging van 5,4 procent als belangrijkste oorzaak. Bij
 arbeidsintensieve klussen werkt dat sterker door dan bij materiaalintensieve klussen.
 """
 
+TARIEVEN_FEITEN = ('<dl class="feiten">%s%s%s</dl>' % (
+    feit('5,4%', 'stijging van de loonkosten in de woningbouw in juni 2026, volgens het CBS'),
+    feit('25 tot 60', 'euro voorrijkosten, het bedrag dat het vaakst buiten een offerte valt'),
+    feit('9%', 'btw over de arbeid bij schilder- en stukadoorswerk aan woningen ouder dan twee jaar')))
+
 site.add('/tarieven/', T('Tarieven per vakgebied en per klus'),
          'Gangbare uurtarieven per vakgebied, vaste prijzen voor veelvoorkomende klussen, '
          'prijzen per vierkante meter en de gebruikelijke toeslagen.',
-         '<section class="smal"><h1>Tarieven</h1>%s%s</section>'
-         % (render(TARIEVEN_MD), kk_blok()), h1='Tarieven', priority='0.9')
+         tekstpagina('Tarieven', TARIEVEN_MD, TARIEVEN_FEITEN + kk_blok()),
+         h1='Tarieven', priority='0.9')
 
 # ---------------------------------------------------------------- hulpmiddelen
-HULP_INDEX = ('<section class="smal"><h1>Hulpmiddelen</h1>'
-              '<p>Twee hulpmiddelen die volledig in de browser werken. Er wordt niets '
-              'opgeslagen en niets verstuurd.</p></section>'
-              '<section><div class="rooster">%s</div></section>'
-              % (kaart('Kostenindicatie klus', '/hulpmiddelen/kostenindicatie/',
-                       'Uurtarief, geschatte uren, voorrijkosten en spoedtoeslag in een keer doorgerekend.')
-                 + kaart('Vragen voor de vakman', '/hulpmiddelen/vragen-voor-de-vakman/',
-                         'De vragen die vooraf gesteld horen te worden, per fase van het traject.')))
+HULP_INDEX = ('<section class="opening"><div class="blok"><h1>Hulpmiddelen</h1>'
+              '<p class="lead">Twee hulpmiddelen die volledig in de browser werken. Er wordt '
+              'niets opgeslagen en niets verstuurd.</p></div></section>'
+              '<section class="blok">%s</section>'
+              % lijst([
+                  rij('01', 'Kostenindicatie klus', '/hulpmiddelen/kostenindicatie/',
+                      'Uurtarief, geschatte uren, voorrijkosten en spoedtoeslag in een keer '
+                      'doorgerekend tot een bandbreedte.'),
+                  rij('02', 'Vragen voor de vakman', '/hulpmiddelen/vragen-voor-de-vakman/',
+                      'De vragen die vooraf gesteld horen te worden, per fase van het '
+                      'traject, van eerste contact tot afronding.')]))
 
 site.add('/hulpmiddelen/', T('Hulpmiddelen bij het uitbesteden van een klus'),
          'Een kostenindicatie berekenen en de vragen doorlopen die vooraf gesteld horen te '
@@ -349,7 +399,7 @@ site.add('/hulpmiddelen/', T('Hulpmiddelen bij het uitbesteden van een klus'),
          HULP_INDEX, h1='Hulpmiddelen', priority='0.8')
 
 KOSTEN_TOOL = """
-<section class="smal">
+<div class="tekstlay zonder"><div class="tekst">
 <h1>Kostenindicatie klus</h1>
 <p>Deze rekenhulp zet een geschat aantal uren om in een indicatie van de rekening, inclusief
 voorrijkosten, toeslagen en materiaal. De uitkomst is een orde van grootte om een offerte
@@ -407,7 +457,7 @@ specialistisch materiaal, of werk dat meer uren vraagt dan geschat.</p>
 <p>Meer over de keuze tussen uurtarief en vaste prijs staat op
 <a href="/kiezen/uurtarief-of-vaste-prijs/">uurtarief of vaste prijs</a>. De volledige
 tarievenlijst staat op <a href="/tarieven/">tarieven</a>.</p>
-</section>
+</div></div>
 """
 
 KOSTEN_SCRIPT = """<script>
@@ -443,7 +493,7 @@ site.add('/hulpmiddelen/kostenindicatie/', T('Kostenindicatie voor een klus bere
          KOSTEN_TOOL + KOSTEN_SCRIPT, h1='Kostenindicatie klus')
 
 VRAGEN = """
-<section class="smal">
+<div class="tekstlay zonder"><div class="tekst">
 <h1>Vragen voor de vakman</h1>
 <p>De meeste problemen bij een klus ontstaan doordat iets niet is gevraagd. Hieronder de
 vragen per fase, van het eerste contact tot de afronding.</p>
@@ -504,7 +554,7 @@ minuten.</p>
 
 <p>Meer over de juridische kant staat op <a href="/kiezen/garantie-en-nazorg/">garantie en
 nazorg</a> en op <a href="/kiezen/klacht-en-geschil/">klacht en geschil</a>.</p>
-</section>
+</div></div>
 """
 
 site.add('/hulpmiddelen/vragen-voor-de-vakman/', T('Vragen voor de vakman'),
@@ -516,26 +566,30 @@ site.add('/hulpmiddelen/vragen-voor-de-vakman/', T('Vragen voor de vakman'),
 site.add('/nieuws/', T('Nieuws over tarieven, regels en klussen'),
          'Artikelen over tarieven, regelgeving, reviews en de praktijk van een klus '
          'uitbesteden in Nederland.',
-         '<section class="smal"><h1>Nieuws</h1><p>Artikelen over tarieven, regels en de '
-         'praktijk van klussen uitbesteden. Nieuwe artikelen verschijnen ook via '
-         '<a href="/rss.xml">de rss-feed</a>.</p></section>'
-         '<section><div class="rooster">%s</div></section>'
-         % ''.join(kaart(t, '/nieuws/%s/' % s, sam, nl_datum(datum))
-                   for s, datum, _rfc, t, _d, sam, _md in C_NIEUWS.ARTIKELEN),
+         '<section class="opening"><div class="blok"><h1>Nieuws</h1>'
+         '<p class="lead">Artikelen over tarieven, regels en de praktijk van klussen '
+         'uitbesteden. Nieuwe artikelen verschijnen ook via '
+         '<a href="/rss.xml">de rss-feed</a>.</p></div></section>'
+         '<section class="blok">%s</section>'
+         % lijst([rij(datumkort(datum), t, '/nieuws/%s/' % s,
+                      sam + ' <span class="sans">' + nl_datum(datum) + '</span>')
+                  for s, datum, _rfc, t, _d, sam, _md in C_NIEUWS.ARTIKELEN]),
          h1='Nieuws', priority='0.9')
 
-for slug, datum, rfc, titel, desc, sam, md in C_NIEUWS.ARTIKELEN:
+for slug_, datum, rfc, titel, desc, sam, md in C_NIEUWS.ARTIKELEN:
     schema = json.dumps({
         "@context": "https://schema.org", "@type": "NewsArticle", "headline": titel,
         "datePublished": datum, "dateModified": datum, "inLanguage": "nl-NL",
-        "description": desc, "mainEntityOfPage": BASE + '/nieuws/%s/' % slug,
+        "description": desc, "mainEntityOfPage": BASE + '/nieuws/%s/' % slug_,
         "publisher": {"@type": "Organization", "name": NAAM},
     }, ensure_ascii=False)
-    body = ('<section class="smal"><h1>%s</h1>'
-            '<p class="artikelmeta">Gepubliceerd op %s</p>%s%s'
-            '<p><a href="/nieuws/">Terug naar het nieuwsoverzicht</a></p></section>'
-            % (titel, nl_datum(datum), render(md), kk_blok()))
-    site.add('/nieuws/%s/' % slug, T(titel), desc, body, h1=titel, schema=schema, lastmod=datum)
+    staart = (kk_blok() +
+              '<p class="meerlink"><a href="/nieuws/">Terug naar het nieuwsoverzicht</a></p>')
+    body = tekstpagina(titel, md, staart)
+    body = body.replace('<h1>%s</h1>' % titel,
+                        '<h1>%s</h1><p class="artikelmeta">Gepubliceerd op %s</p>'
+                        % (titel, nl_datum(datum)))
+    site.add('/nieuws/%s/' % slug_, T(titel), desc, body, h1=titel, schema=schema, lastmod=datum)
 
 # ---------------------------------------------------------------- over
 OVER_MD = """
@@ -591,15 +645,22 @@ Vragen of opmerkingen over de inhoud kunnen naar info@echteklussers.nl. Meer daa
 op de contactpagina.
 """
 
+OVER_VIDEO = ('<h2 id="werkbus">Uit de praktijk</h2>'
+              + video('cK0QQZZQJDE',
+                      'Een dag mee met de kleinste werkbus van Nederland',
+                      'Een korte film van het YouTube-kanaal van Kleine-Klussen, over een '
+                      'werkdag met een bakfiets in plaats van een bestelbus. De video wordt '
+                      'pas na een klik geladen, via youtube-nocookie.com.'))
+
 site.add('/over/', T('Over Echteklussers.nl'),
          'Wat Echteklussers.nl is: een onafhankelijke gids over het beoordelen van '
          'vakmensen, zonder bemiddeling, offerteaanvraag of doorverkoop van gegevens.',
-         '<section class="smal"><h1>Over deze gids</h1>%s</section>' % render(OVER_MD),
+         tekstpagina('Over deze gids', OVER_MD, OVER_VIDEO),
          h1='Over deze gids', priority='0.6')
 
 # ---------------------------------------------------------------- contact
 CONTACT = """
-<section class="smal">
+<div class="tekstlay zonder"><div class="tekst">
 <h1>Contact</h1>
 <p>Echteklussers.nl is een informatieve gids. Er is één contactmogelijkheid en dat is
 e-mail.</p>
@@ -629,7 +690,7 @@ optie, met online een datum en tijdslot. Zie
 <h2>Reactietermijn</h2>
 <p>E-mail wordt doorgaans binnen enkele werkdagen beantwoord. Berichten met een commercieel
 aanbod of een verzoek tot linkplaatsing blijven onbeantwoord.</p>
-</section>
+</div></div>
 """
 
 site.add('/contact/', T('Contact'),
@@ -656,9 +717,15 @@ die nodig zijn om de site te tonen en te beveiligen, waaronder het IP-adres, het
 van het verzoek, de opgevraagde pagina en het type browser. Die verwerking vindt plaats op
 grond van een gerechtvaardigd belang: het beschikbaar en veilig houden van de website.
 
-Er wordt geen bezoekersstatistiek van derden geladen, geen advertentienetwerk, geen
-socialemediaknop en geen ingesloten inhoud van andere partijen. De pagina's laden geen
-externe bestanden.
+Er wordt geen bezoekersstatistiek van derden geladen, geen advertentienetwerk en geen
+socialemediaknop. De pagina's laden uit zichzelf geen externe bestanden.
+
+### Bij het afspelen van een video
+Op enkele pagina's staat een video van het YouTube-kanaal van Kleine-Klussen. Die video
+wordt niet meegeladen met de pagina. Er staat een knop, en pas na een klik daarop wordt de
+video opgehaald bij youtube-nocookie.com. Vanaf dat moment verwerkt YouTube, onderdeel van
+Google, gegevens zoals het IP-adres en het apparaattype, en geldt het privacybeleid van die
+partij. Wie niet klikt, laadt niets.
 
 ### Bij e-mail
 Wie mailt naar info@echteklussers.nl, verstuurt daarmee een e-mailadres en de inhoud van
@@ -668,7 +735,7 @@ e-mailadressen gedeeld met derden.
 
 ## Cookies
 
-Deze website plaatst geen cookies voor analyse, advertenties of profilering. Zie het
+Deze website plaatst zelf geen cookies voor analyse, advertenties of profilering. Zie het
 cookiebeleid voor de details.
 
 ## Bewaartermijn
@@ -711,17 +778,25 @@ bovenaan geeft de laatste wijziging aan.
 site.add('/privacybeleid/', T('Privacybeleid'),
          'Hoe Echteklussers.nl omgaat met persoonsgegevens: geen formulieren, geen '
          'tracking en geen cookies voor analyse of advertenties.',
-         '<section class="smal"><h1>Privacybeleid</h1>%s</section>' % render(PRIVACY_MD),
-         h1='Privacybeleid', priority='0.3')
+         tekstpagina('Privacybeleid', PRIVACY_MD), h1='Privacybeleid', priority='0.3')
 
 COOKIE_MD = """
 Laatste wijziging: 29 augustus 2026.
 
-## Geen cookies
+## Geen eigen cookies
 
-Echteklussers.nl plaatst geen cookies. Er is geen analysepakket, geen advertentienetwerk,
-geen socialemediaknop en geen ingesloten inhoud van derden. Daarom staat er ook geen
-cookiemelding op deze site: een toestemmingsvraag zonder cookies heeft geen functie.
+Echteklussers.nl plaatst zelf geen cookies. Er is geen analysepakket, geen
+advertentienetwerk en geen socialemediaknop. Daarom staat er geen cookiemelding op deze
+site: een toestemmingsvraag zonder cookies heeft geen functie.
+
+## Video's
+
+Op enkele pagina's staat een video van het YouTube-kanaal van Kleine-Klussen. Die video
+laadt niet mee met de pagina. Er staat een knop, en pas na een klik daarop wordt de video
+opgehaald bij youtube-nocookie.com, de variant van YouTube die geen cookies plaatst voor
+gepersonaliseerde advertenties. YouTube kan daarbij wel gegevens vastleggen die nodig zijn
+om de video af te spelen, en op dat moment geldt het privacybeleid van YouTube en Google.
+Wie de knop niet gebruikt, laadt geen enkel bestand van YouTube.
 
 ## Wat er technisch wel gebeurt
 
@@ -743,7 +818,7 @@ site.
 ## Cookies uitzetten
 
 Elke browser biedt de mogelijkheid cookies te blokkeren of te verwijderen. Omdat deze site
-geen cookies plaatst, heeft dat geen invloed op de werking ervan.
+zelf geen cookies plaatst, heeft dat geen invloed op de werking ervan.
 
 ## Vragen
 
@@ -751,24 +826,23 @@ Vragen over dit cookiebeleid kunnen naar info@echteklussers.nl
 """
 
 site.add('/cookiebeleid/', T('Cookiebeleid'),
-         'Echteklussers.nl plaatst geen cookies voor analyse, advertenties of profilering. '
-         'Uitleg over wat er technisch wel gebeurt op de website.',
-         '<section class="smal"><h1>Cookiebeleid</h1>%s</section>' % render(COOKIE_MD),
-         h1='Cookiebeleid', priority='0.3')
+         'Echteklussers.nl plaatst zelf geen cookies. Video\'s worden pas na een klik '
+         'geladen, via youtube-nocookie.com.',
+         tekstpagina('Cookiebeleid', COOKIE_MD), h1='Cookiebeleid', priority='0.3')
 
 site.add('/404/', T('Pagina niet gevonden'),
          'Deze pagina bestaat niet of is verplaatst. De overzichten hieronder geven toegang '
          'tot de rest van de gids.',
-         '<section class="smal"><h1>Pagina niet gevonden</h1>'
+         '<div class="tekstlay zonder"><div class="tekst"><h1>Pagina niet gevonden</h1>'
          '<p>Deze pagina bestaat niet of is verplaatst. Onderstaande overzichten geven '
          'toegang tot de rest van de gids.</p>'
-         '<ul><li><a href="/">Home</a></li>'
+         '<ul><li><a href="/">Start</a></li>'
          '<li><a href="/vakmensen/">Vakgebieden</a></li>'
          '<li><a href="/kiezen/">Kiezen en beoordelen</a></li>'
          '<li><a href="/tarieven/">Tarieven</a></li>'
          '<li><a href="/hulpmiddelen/">Hulpmiddelen</a></li>'
          '<li><a href="/nieuws/">Nieuws</a></li>'
-         '<li><a href="/contact/">Contact</a></li></ul></section>',
+         '<li><a href="/contact/">Contact</a></li></ul></div></div>',
          h1='Pagina niet gevonden')
 
 if __name__ == '__main__':
