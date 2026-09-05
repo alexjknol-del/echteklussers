@@ -2,6 +2,108 @@
 """Nieuwsartikelen echteklussers.nl."""
 
 ARTIKELEN = [
+    ("gereedschap-van-de-vakman", "2026-09-05", "Fri, 05 Sep 2026 09:00:00 +0200",
+     "Waaraan het gereedschap van een vakman te herkennen is",
+     "Het gereedschap in de bus zegt iets over hoe er gewerkt wordt. Waar het verschil zit tussen bouwmarktsets en verbruiksmateriaal van vakkwaliteit.",
+     "Bij verbruiksmateriaal is het verschil tussen scherp en stomp direct zichtbaar in het resultaat. Waar dat op neerkomt bij zaagbladen en gatenzagen.",
+     """
+Wie een vakman over de vloer krijgt, kijkt naar de offerte en naar de reviews. Wat er uit de bus komt, zegt echter net zoveel. Niet omdat duur gereedschap beter werk oplevert, maar omdat de keuze van het verbruiksmateriaal laat zien of iemand vaker met dit soort werk te maken heeft.
+
+## Machines versus verbruiksmateriaal
+
+Bij machines is het verschil tussen een bouwmarktmerk en een professioneel merk vooral levensduur. Bij verbruiksmateriaal, dus boren, zaagbladen, gatenzagen en bitjes, is het verschil direct zichtbaar in het resultaat. Een stomp blad in een goede machine geeft een slechter gat dan een scherp blad in een matige machine.
+
+Dat is ook de reden dat een vakman zelden een complete set uit een koffer gebruikt. In de praktijk staat er een doos met losse maten, afgestemd op wat er die week gedaan wordt, en worden versleten stukken vervangen in plaats van bijgeschaafd.
+
+## Zaagbladen
+
+Bij een reciprozaag bepaalt de tandsteek waar het blad voor bedoeld is. Grove tanden voor hout en sloopwerk, fijne tanden voor metaal, en bimetaal voor werk waar spijkers in het hout kunnen zitten. Wie met een houtblad door een spijker gaat, verliest tanden en verlengt de klus. Een vakman heeft daarom meerdere bladen bij zich, ook voor werk waarvan hij weet dat er slechts een nodig is.
+
+## Gatenzagen
+
+Voor doorvoeren en inbouwspots is de gatenzaag het gereedschap dat het snelst verkeerd gekozen wordt. De maat moet exact kloppen met de spot of de doos, en het type moet aansluiten op de ondergrond: bimetaal voor hout en gipsplaat, hardmetaal voor tegels en steenachtige platen. Zagen door een tegelwand met een houtzaag verpest zowel de tegel als de zaag.
+
+## Wat dit zegt over de offerte
+
+Verbruiksmateriaal staat zelden apart op een offerte en zit in het uurtarief of in de aanneemsom. Dat betekent dat een lager tarief soms betaald wordt met bladen die te lang doorgaan. Bij werk waar het zichtwerk telt, zoals een doorvoer in een afgewerkte wand of een gat in een tegel, is dat de plek waar het verschil achteraf zichtbaar is.
+
+Bij het beoordelen van een offerte helpt het daarom om te vragen hoe een specifieke doorvoer wordt gemaakt. Het antwoord daarop zegt meer over de uitvoering dan het totaalbedrag onderaan.
+
+Er is nog een signaal dat weinig aandacht krijgt: hoe het stof wordt opgevangen. Boren in gipsplaat, beton of tegels geeft fijnstof dat zich door het hele huis verspreidt. Een installateur die met afzuiging aan de machine werkt of met een stofvanger onder het boorgat, houdt niet alleen de woning schoon maar werkt ook met minder slijtage aan de machine zelf.
+
+> Gatenzagen, zaagbladen voor de reciprozaag, boren en bitjes zijn per stuk of per set te bestellen bij een gespecialiseerde webshop, met vermelding van het materiaal en de tandsteek per blad.
+
+> [boorkopen.nl](https://www.boorkopen.nl/gatenzaag/ "dofollow") en [https://www.boorkopen.nl/zaagbladen/zaagblad-reciprozaag/](https://www.boorkopen.nl/zaagbladen/zaagblad-reciprozaag/ "dofollow")
+"""),
+
+    ("lijmwerk-zelf-of-uitbesteden", "2026-09-05", "Fri, 05 Sep 2026 09:00:00 +0200",
+     "Lijmwerk zelf doen of laten doen",
+     "Bij welke lijmklussen een vakman het verschil maakt en bij welke niet, plus wat er misgaat bij het verwijderen van lijmresten.",
+     "Bij constructief werk en op zichtbare afwerking verdient uitbesteden zich terug. Bij het verwijderen van lijmresten ontstaat de meeste schade.",
+     """
+Lijmen lijkt de eenvoudigste handeling in huis en levert opvallend vaak de duurste correctie op. Niet doordat de verbinding mislukt, maar doordat een verkeerde lijm op een verkeerde ondergrond het materiaal beschadigt op een manier die niet meer te herstellen is.
+
+## Waar een vakman het verschil maakt
+
+Er zijn drie categorieen waarbij uitbesteden zich terugverdient. De eerste is constructief werk: een trapleuning, een balkverbinding, een dorpel die belast wordt. De tweede is werk op een zichtbare afwerking, zoals een keukenblad, een vensterbank of een vloer met een dunne toplaag. De derde is alles waar warmte, water of chemische belasting bij komt, zoals een douchewand of een werkblad naast een kookplaat.
+
+Bij de overige klussen, van een losse plint tot een gebroken vaas, is het verschil tussen zelf doen en uitbesteden vooral de tijd die het kost om uit te zoeken welke lijm past bij de combinatie van materialen.
+
+## De fout die het vaakst gemaakt wordt
+
+Meer lijm geeft geen sterkere verbinding. Bij vrijwel alle lijmsoorten is een dunne, gelijkmatige laag sterker dan een dikke, omdat een dikke laag aan de buitenkant uithardt en in de kern zacht blijft. Alleen bij montagelijm en bij vulmiddelen op epoxybasis gaat die regel niet op, en juist daar wordt hij het vaakst toegepast.
+
+De tweede terugkerende fout is te vroeg belasten. De klemtijd op de verpakking gaat over het moment waarop het werk losgelaten kan worden, niet over het moment waarop het gewicht mag dragen.
+
+## Lijmresten weghalen
+
+Dit is het onderdeel waarbij de schade ontstaat. Aceton lost secondelijm op en tast tegelijk kunststof, gelakt hout en veel vloerafwerkingen aan. Krabben met een mes laat op laminaat en pvc een streep achter die er niet meer uitgaat. Een middel dat op het materiaal is afgestemd, met een inwerktijd in plaats van kracht, is bij een zichtbare ondergrond de enige route die het oppervlak heel laat.
+
+## Wat vooraf te vragen
+
+Bij een vakman die lijmwerk uitvoert op een zichtbare afwerking is een vraag genoeg: welk product wordt gebruikt en waarom dat product bij deze combinatie past. Wie daar geen antwoord op heeft, gaat het waarschijnlijk op gevoel doen.
+
+Bij het beoordelen van een offerte voor lijmwerk telt nog iets anders mee: of er garantie op de verbinding zit en hoe lang. Een vakman die zijn eigen product kiest, geeft daar doorgaans garantie op. Bij materiaal dat door de opdrachtgever wordt aangeleverd, vervalt die vrijwel altijd, en dat is bij een keukenblad of een vensterbank een verschil dat pas na een jaar zichtbaar wordt.
+
+> Voor het verwijderen van secondelijm en andere lijmresten bestaan middelen die op het materiaal zijn afgestemd, met per ondergrond een aparte werkwijze voor pvc, laminaat, glas en aardewerk.
+
+> [Mesa Products](https://www.mesaproducts.nl/hoe-verwijder-je-secondelijm/ "dofollow") en [https://www.mesaproducts.nl/lijmverwijderaar/](https://www.mesaproducts.nl/lijmverwijderaar/ "dofollow")
+"""),
+
+    ("erkende-elektricien-kiezen", "2026-09-05", "Fri, 05 Sep 2026 09:00:00 +0200",
+     "Een elektricien kiezen: erkenning, keuring en offerte",
+     "Waar een installateur op te beoordelen is, welke papieren er na afloop horen te liggen en waarin werk voor bedrijven verschilt van werk in een woning.",
+     "Er bestaat geen vergunningplicht, wel een norm. Waar een offerte op na te kijken is en waarom het meetrapport na oplevering telt.",
+     """
+Elektrawerk is het enige vakgebied in huis waar een fout niet zichtbaar is en toch jaren blijft bestaan. Een scheve tegel valt op, een verkeerd aangesloten aardleiding niet. Daarmee is de keuze van de installateur belangrijker dan bij vrijwel elk ander vak.
+
+## Waar het woord erkend op slaat
+
+Er bestaat in Nederland geen wettelijke vergunningplicht voor elektrotechnisch werk in een woning. Wat er wel is, zijn normen, met NEN 1010 als de belangrijkste voor nieuwe installaties. Een bedrijf dat aangesloten is bij een branchevereniging of dat werkt onder een erkenningsregeling, verplicht zich aan die norm en aan een geschillenregeling. Dat is het verschil dat achteraf telt bij schade.
+
+Bij werk aan de meterkast komt daar een tweede laag bij. Alles voor de hoofdzekering is van de netbeheerder, alles erna van de eigenaar. Een installateur die de aansluiting wil verzwaren, meldt dat aan bij de netbeheerder en voert het werk erna zelf uit.
+
+## Wat er in de offerte hoort te staan
+
+Een bruikbare offerte voor elektrawerk noemt drie dingen. Het aantal groepen en het type beveiliging per groep, dus welke groep een eigen aardlekschakelaar krijgt. Het aantal wandcontactdozen en lichtpunten per ruimte, want dat is het onderdeel waar meerwerk ontstaat. En of het werk wordt opgeleverd met een meetrapport.
+
+Dat meetrapport is geen formaliteit. Het bevat de gemeten isolatieweerstand, de doorverbinding van de aarde en de aanspreektijd van de aardlekschakelaars. Bij schade aan apparatuur of bij verkoop van het pand is dat het enige stuk dat de staat van de installatie op dat moment vastlegt.
+
+## Woning of bedrijfspand
+
+Het verschil zit in de eisen eromheen. Bij een bedrijfspand komen keuringen van vaste installaties en van arbeidsmiddelen erbij, plus eisen aan noodverlichting en soms aan een aparte serverruimte of laadinfrastructuur. Een installateur die alleen woningen doet, loopt daar tegen regelgeving aan die in een woning niet speelt.
+
+## Het gesprek vooraf
+
+Een installateur die eerst wil zien wat er ligt voordat er een prijs komt, werkt zorgvuldiger dan een installateur die telefonisch een bedrag noemt. Bij bestaande bouw is de staat van de bestaande bedrading namelijk de grootste onbekende, en die is niet in te schatten zonder de kast open te maken.
+
+Reviews zijn bij dit vakgebied minder bruikbaar dan bij andere. Een tevreden bewoner beoordeelt de netheid van het werk en de afspraak die is nagekomen, niet de kwaliteit van de aansluiting achter de wandcontactdoos. Bruikbaarder is de vraag of het bedrijf ook onderhoud en keuringen doet: partijen die jaarlijks bij dezelfde installaties terugkomen, leveren werk op dat zij zelf later weer tegenkomen.
+
+> Werk aan groepenkasten, kookgroepen, laadpunten, verlichting en data loopt bij zowel woningen als bedrijfspanden via een elektrotechnisch installateur, met een meetrapport na oplevering.
+
+> [Stroommannen](https://stroommannen.nl/zakelijk/ "dofollow") en [stroommannen.nl](https://stroommannen.nl/particulier/ "dofollow")
+"""),
+
     ("loonkosten-bouw-2026", "2026-08-20", "Thu, 20 Aug 2026 09:00:00 +0200",
      "Loonkosten drijven de tarieven, niet de materialen",
      "CBS-cijfers over juni 2026 laten zien dat de loonkosten in de woningbouw met 5,4 procent harder stijgen dan de materiaalkosten met 4,6 procent.",
