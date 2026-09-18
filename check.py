@@ -13,6 +13,7 @@ TOEGESTANE_HOSTS = {
     'www.boorkopen.nl',
     'www.mesaproducts.nl',
     'stroommannen.nl',
+    'www.lijmenwinkel.nl',
 }
 TOEGESTANE_ANKERS = {
     'kleine-klussen.nl',
@@ -25,8 +26,10 @@ TOEGESTANE_ANKERS = {
     'https://www.mesaproducts.nl/lijmverwijderaar/',
     'Stroommannen',
     'stroommannen.nl',
+    'pp lijm',
+    'www.lijmenwinkel.nl',
 }
-DOFOLLOW_HOSTS = {'www.boorkopen.nl', 'www.mesaproducts.nl', 'stroommannen.nl'}
+DOFOLLOW_HOSTS = {'www.lijmenwinkel.nl', 'www.boorkopen.nl', 'www.mesaproducts.nl', 'stroommannen.nl'}
 AANSPREEK = ['je', 'jij', 'jou', 'jouw', 'jullie', 'uw', 'we', 'wij', 'ons', 'onze']
 DUMMY = ['lorem ipsum', 'placeholder', 'tekst volgt', 'nog invullen', 'todo', 'xxx',
          'voorbeeldtekst', 'vul hier', 'dummy']
