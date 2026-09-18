@@ -2,6 +2,38 @@
 """Nieuwsartikelen echteklussers.nl."""
 
 ARTIKELEN = [
+    ("kunststof-lijmen-waar-niets-op-hecht", "2026-09-18", "Fri, 18 Sep 2026 09:00:00 +0200",
+     "Zo lijmt men kunststof waar normaal niets op blijft zitten",
+     "Lijm die van kunststof afbladdert is geen pech maar natuurkunde. Hoe de juiste lijm gekozen wordt voor materialen waar vrijwel niets op hecht.",
+     "Polypropeen en polyetheen zijn gemaakt om niets aan te laten hechten. Met de juiste diagnose, voorbehandeling en naadvorm houdt een reparatie toch.",
+     """
+Polypropeen heeft een oppervlaktespanning van ongeveer 29 mN per meter, terwijl voor een betrouwbare hechting meestal minstens 32 nodig is. Dat ene getal verklaart waarom secondelijm er na een week gewoon weer af te pulken is. Het probleem zit niet in de techniek en ook niet in de kwaliteit van de lijm, maar in een materiaal dat juist ontworpen is om niets aan te laten hechten. Met de juiste aanpak is het alsnog goed op te lossen.
+
+## Eerst vaststellen om welke kunststof het gaat
+
+Een verkeerde diagnose maakt elke vervolgstap zinloos. Het begint bij het driehoekje met het recyclingnummer: 5 staat voor polypropeen, 2 of 4 voor polyetheen. Staat er niets op, dan helpt een klein schilfertje in een glas water. Polypropeen en polyetheen blijven drijven, de meeste andere kunststoffen zakken. Is zeker dat het om PP gaat, dan is gericht zoeken naar [pp lijm](https://www.lijmenwinkel.nl/nl/toepassing/kunststof-lijm/polypropeen-pp/ "dofollow") zinvoller dan een universele lijm die op de verpakking alles belooft. Die laatste categorie is precies waar de meeste mislukte reparaties vandaan komen.
+
+## De oppervlaktespanning meten voor de aanschaf
+
+Er bestaan testinkten waarmee binnen tien seconden duidelijk is of een oppervlak lijmbaar is. Een streepje inkt op het materiaal laat het zien. Blijft het minstens drie seconden als een gesloten filmpje staan, dan haalt het oppervlak die waarde. Trekt het meteen samen tot druppels, dan zit het eronder. Zulke sets lopen van 30 tot 72 mN per meter in stapjes van twee. Ter vergelijking: polyetheen zit rond de 31 en PTFE zelfs rond de 18, terwijl PVC en ABS ruim boven de drempel uitkomen. Dat verklaart waarom dezelfde lijm op het ene stuk plastic prima werkt en op het andere niet.
+
+## Voorbehandelen of een lijm die dat zelf doet
+
+Industrieel wordt de oppervlaktespanning verhoogd met een vlam, met corona of met plasma. Die methoden werken, maar vragen om nauwkeurige controle van tijd en intensiteit, want een fractie te lang vlammen vervormt het onderdeel. Voor incidenteel werk is dat geen begaanbare weg. Het alternatief is een tweecomponenten acrylaat met een etsend bestanddeel dat het oppervlak zelf aanpakt, zodat primer of voorbehandeling niet nodig is. Op [www.lijmenwinkel.nl](https://www.lijmenwinkel.nl/nl/ "dofollow") staan die lijmen onder de aanduiding tweecomponenten acrylaat voor polyolefinen, meestal in een mengverhouding van een op een.
+
+## Ontvetten en schuren in de juiste volgorde
+
+De meeste mensen schuren eerst en ontvetten daarna. Daarmee wordt vet dat op het oppervlak lag juist in de verse krassen gewreven. De goede volgorde: eerst ontvetten met isopropanol, daarna licht opschuren met korrel 180 tot 240, en dan nog een keer ontvetten om het schuurstof weg te halen. Na die laatste stap het vlak niet meer met blote vingers aanraken, want huidvet is genoeg om de hechting merkbaar te verslechteren. Lijm daarna binnen enkele minuten, zeker na een voorbehandeling, omdat het effect daarvan in de loop van de dag terugloopt.
+
+## De verbinding zo ontwerpen dat hij niet kan pellen
+
+Een lijmnaad is sterk op afschuiving en zwak op pellen. Twee vlakken die over elkaar schuiven houden veel meer uit dan een randje dat op te lichten is. De overlap mag daarom zo groot zijn als de constructie toestaat, met de kracht in het vlak van de naad in plaats van er dwars op. Zit er toch een rand die kan gaan pellen, dan helpt een opstaand randje of een klein mechanisch verbindingspunt. Dat is geen teken van zwak lijmwerk maar gewoon goed ontwerp.
+
+## Samengevat
+
+Het materiaal bepalen, het oppervlak meten, bewust kiezen tussen voorbehandelen en een zelfetsende lijm, en de naad ontwerpen op afschuiving. Dan is zelfs de meest onwillige kunststof gewoon te lijmen.
+"""),
+
     ("gereedschap-van-de-vakman", "2026-09-05", "Fri, 05 Sep 2026 09:00:00 +0200",
      "Waaraan het gereedschap van een vakman te herkennen is",
      "Het gereedschap in de bus zegt iets over hoe er gewerkt wordt. Waar het verschil zit tussen bouwmarktsets en verbruiksmateriaal van vakkwaliteit.",
