@@ -9,6 +9,8 @@ DIST = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'dist')
 
 EIGEN_HOST = 'echteklussers.nl'
 TOEGESTANE_HOSTS = {
+    'www.hashop.nl',
+    'koelklima.nl',
     'www.kleine-klussen.nl',
     'www.boorkopen.nl',
     'www.mesaproducts.nl',
@@ -16,6 +18,8 @@ TOEGESTANE_HOSTS = {
     'www.lijmenwinkel.nl',
 }
 TOEGESTANE_ANKERS = {
+    'Home assistant',
+    'Warmtepomp onderhoud Heerenveen',
     'kleine-klussen.nl',
     'Kleine-Klussen.nl',
     'https://www.kleine-klussen.nl/',
@@ -29,7 +33,7 @@ TOEGESTANE_ANKERS = {
     'pp lijm',
     'www.lijmenwinkel.nl',
 }
-DOFOLLOW_HOSTS = {'www.lijmenwinkel.nl', 'www.boorkopen.nl', 'www.mesaproducts.nl', 'stroommannen.nl'}
+DOFOLLOW_HOSTS = {'www.hashop.nl', 'koelklima.nl', 'www.lijmenwinkel.nl', 'www.boorkopen.nl', 'www.mesaproducts.nl', 'stroommannen.nl'}
 AANSPREEK = ['je', 'jij', 'jou', 'jouw', 'jullie', 'uw', 'we', 'wij', 'ons', 'onze']
 DUMMY = ['lorem ipsum', 'placeholder', 'tekst volgt', 'nog invullen', 'todo', 'xxx',
          'voorbeeldtekst', 'vul hier', 'dummy']
