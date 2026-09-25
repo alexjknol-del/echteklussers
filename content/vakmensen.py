@@ -103,6 +103,15 @@ de reparatie. Bij een lekkage die tot waterschade heeft geleid, is de opsporing 
 gedekt door de opstal- of inboedelverzekering, ook als de reparatie zelf dat niet is. Het
 loont om dat te controleren voordat de opdracht wordt gegeven.
 
+## Warmtepomp en cv
+
+Radiatoren, leidingwerk en de aansluiting van een cv-ketel zijn loodgieterswerk. Het
+onderhoud aan een warmtepomp valt daarbuiten: aan het koudemiddelcircuit mag alleen een
+installateur met een F-gassencertificaat werken. [Warmtepomp onderhoud Heerenveen](https://koelklima.nl/warmtepomp-onderhoud/heerenveen/ "dofollow")
+en omgeving verzorgt bijvoorbeeld een klimaatinstallateur uit Drachten. Een jaarlijkse
+controle van filters, druk en condensafvoer houdt het rendement op peil en voorkomt dat
+een storing midden in de winter optreedt.
+
 ## Waar op te letten
 
 - Bij spoed: vooraf navragen wat het starttarief is en hoeveel uren minimaal gerekend worden
@@ -152,6 +161,15 @@ Bij aankoop van een oudere woning, bij twijfel over eerder uitgevoerd werk of bi
 verzwaring van de aansluiting is een inspectie van de installatie zinvol. Het rapport geeft
 aan welke groepen niet beveiligd zijn, waar de aarding ontbreekt en welke bedrading aan
 vervanging toe is. Dat rapport is ook bruikbaar richting een verzekeraar.
+
+## Slimme installatie
+
+Bij een verbouwing komt steeds vaker domotica kijken: schakelaars, sensoren en verlichting
+die vanaf een centraal punt te bedienen zijn. De elektricien legt de bedrading, de voeding
+en eventuele extra groepen aan. De besturing draait daarna vaak op een open platform als
+[Home assistant](https://www.hashop.nl/home-assistant "dofollow"), met modules en sensoren
+van gespecialiseerde winkels. Het loont om vooraf vast te leggen wie het systeem na de
+oplevering instelt, want veel elektriciens nemen dat deel niet mee in de offerte.
 
 ## Waar op te letten
 
