@@ -2,7 +2,7 @@
 """Nieuwsartikelen echteklussers.nl."""
 
 ARTIKELEN = [
-    ('is-de-vakman-verzekerd', "2026-10-02", "Fri, 02 Oct 2026 09:00:00 +0200",
+    ('is-de-vakman-verzekerd', "2026-09-23", "Wed, 23 Sep 2026 09:00:00 +0200",
      'Is de vakman verzekerd? Aansprakelijkheid en CAR nagaan voor de klus',
      'Wat een opdrachtgever voor de klus over de verzekering van een vakman kan navragen, en welke schade de aansprakelijkheids- en CAR-verzekering dekken.',
      'Een offerte zegt veel over prijs en planning, maar weinig over wat er gebeurt als er iets misgaat. De verzekering van de vakman verdient daarom ook een blik.',
