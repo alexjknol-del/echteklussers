@@ -2,6 +2,35 @@
 """Nieuwsartikelen echteklussers.nl."""
 
 ARTIKELEN = [
+    ('is-de-vakman-verzekerd', "2026-10-02", "Fri, 02 Oct 2026 09:00:00 +0200",
+     'Is de vakman verzekerd? Aansprakelijkheid en CAR nagaan voor de klus',
+     'Wat een opdrachtgever voor de klus over de verzekering van een vakman kan navragen, en welke schade de aansprakelijkheids- en CAR-verzekering dekken.',
+     'Een offerte zegt veel over prijs en planning, maar weinig over wat er gebeurt als er iets misgaat. De verzekering van de vakman verdient daarom ook een blik.',
+     """
+Bij het kiezen van een vakman draait het meestal om tarief, planning en reviews. Of de stukadoor, loodgieter of timmerman goed verzekerd is, komt zelden ter sprake. Dat wordt pas een vraag wanneer er iets misgaat: een leiding die wordt doorgeboord, een ladder die door het raam valt of een plafond dat na een week naar beneden komt.
+
+Wie dan ontdekt dat de vakman geen of een beperkte verzekering heeft, staat zwak. Een zelfstandige zonder polis moet de schade uit eigen zak betalen en kan dat lang niet altijd. Het loont dus om voor de start na te gaan hoe het zit. Daarbij gaat het om twee verschillende verzekeringen, die elk een ander soort schade dekken.
+
+## De aansprakelijkheidsverzekering
+
+De bedrijfsaansprakelijkheidsverzekering, vaak afgekort tot AVB, dekt schade die een vakman tijdens het werk aan anderen of hun spullen toebrengt. Denk aan een beschadigd kozijn, een kras op de auto of een bewoner die struikelt over een kabel. Schade aan het eigen gereedschap van de vakman valt erbuiten, net als opzettelijk veroorzaakte schade en schade die alleen financieel is.
+
+Een AVB is voor zzp'ers niet wettelijk verplicht. Veel aannemers en opdrachtgevers vragen er wel om. Een zelfstandige kan zo'n polis al vanaf 10 euro per maand afsluiten, bijvoorbeeld via [https://snelvoorelkaar.nl/verzekeringen/bedrijfsaansprakelijkheidsverzekering-zzp/](https://snelvoorelkaar.nl/verzekeringen/bedrijfsaansprakelijkheidsverzekering-zzp/ "dofollow"), waar de premie afhangt van het beroep en de gekozen dekking. Wie een vakman inhuurt die geen AVB heeft, mag zich dus afvragen waarom niet.
+
+## De CAR-verzekering
+
+Een AVB dekt schade aan anderen, maar niet de schade aan het werk zelf. Stort een pas gemetselde muur in of raakt een nieuwe vloer beschadigd voordat de klus is opgeleverd, dan valt dat niet onder de aansprakelijkheid. Daarvoor bestaat de CAR-verzekering. Die dekt het werk tijdens de uitvoering, de aansprakelijkheid op de bouwplaats en bij verbouw ook het bestaande huis en de inboedel die erin staat.
+
+Bij een kleine reparatie is een CAR-verzekering zelden aan de orde. Bij een aanbouw, een nieuwe badkamer of een renovatie ligt dat anders. Een aannemer kan het werk meeverzekeren op een doorlopende polis, waarop ook onderaannemers en zzp'ers mee te verzekeren zijn. Een particuliere opdrachtgever kan ook zelf een CAR-verzekering afsluiten, bijvoorbeeld via [Snelvoorelkaar](https://snelvoorelkaar.nl/verzekeringen/car-verzekering/ "dofollow"), vanaf 355 euro per project.
+
+## Wat er gevraagd kan worden
+
+De eenvoudigste stap is vragen om een kopie van het polisblad. Daarop staan de naam van de verzekerde, het verzekerde bedrag, het eigen risico en de looptijd. Klopt de naam met die in het handelsregister en loopt de polis nog tijdens de klus, dan is dat een goed teken. Bij een groter werk hoort daar de vraag bij of er een CAR-verzekering is en of de bestaande woning daarop is meeverzekerd.
+
+## Als er toch schade ontstaat
+
+Ontstaat er schade, dan is het verstandig die direct met foto's vast te leggen en schriftelijk bij de vakman te melden. Een vakman met een AVB meldt de schade bij de eigen verzekeraar, die de afhandeling overneemt. Het is daarbij goed om te weten dat het herstel van een fout zelf vaak niet verzekerd is, ook niet onder een CAR-polis. De schade die door die fout ontstaat, is dat meestal wel. Afspraken over herstel van slecht werk horen daarom in de offerte of opdrachtbevestiging te staan.
+"""),
     ("kunststof-lijmen-waar-niets-op-hecht", "2026-09-18", "Fri, 18 Sep 2026 09:00:00 +0200",
      "Zo lijmt men kunststof waar normaal niets op blijft zitten",
      "Lijm die van kunststof afbladdert is geen pech maar natuurkunde. Hoe de juiste lijm gekozen wordt voor materialen waar vrijwel niets op hecht.",
